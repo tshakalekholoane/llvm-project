@@ -3149,21 +3149,21 @@ def SwiftNullability : Attr {
 }
 
 def SwiftAsyncName : InheritableAttr {
-  let Spellings = [GNU<"swift_async_name">];
+  let Spellings = [Clang<"swift_async_name">];
   let Args = [StringArgument<"Name">];
   let Subjects = SubjectList<[ObjCMethod, Function], ErrorDiag>;
   let Documentation = [SwiftAsyncNameDocs];
 }
 
 def SwiftAttr : DeclOrTypeAttr {
-  let Spellings = [GNU<"swift_attr">];
+  let Spellings = [Clang<"swift_attr">];
   let Args = [StringArgument<"Attribute">];
   let Documentation = [SwiftAttrDocs];
   let PragmaAttributeSupport = 1;
 }
 
 def SwiftBridge : InheritableAttr {
-  let Spellings = [GNU<"swift_bridge">];
+  let Spellings = [Clang<"swift_bridge">];
   let Args = [StringArgument<"SwiftType">];
   let Subjects = SubjectList<[Tag, TypedefName, ObjCInterface, ObjCProtocol],
                              ErrorDiag>;
@@ -3185,7 +3185,7 @@ def SwiftObjCMembers : Attr {
 }
 
 def SwiftError : InheritableAttr {
-  let Spellings = [GNU<"swift_error">];
+  let Spellings = [Clang<"swift_error">];
   let Args = [
       EnumArgument<"Convention", "ConventionKind", /*is_string=*/false,
                    ["none", "nonnull_error", "null_result", "zero_result", "nonzero_result"],
@@ -3212,13 +3212,13 @@ def SwiftImportPropertyAsAccessors : InheritableAttr {
 }
 
 def SwiftName : InheritableAttr {
-  let Spellings = [GNU<"swift_name">];
+  let Spellings = [Clang<"swift_name">];
   let Args = [StringArgument<"Name">];
   let Documentation = [SwiftNameDocs];
 }
 
 def SwiftNewType : InheritableAttr {
-  let Spellings = [GNU<"swift_newtype">, GNU<"swift_wrapper">];
+  let Spellings = [Clang<"swift_newtype">, Clang<"swift_wrapper">];
   let Args = [EnumArgument<"NewtypeKind", "NewtypeKind", /*is_string=*/false,
                            ["struct", "enum"], ["NK_Struct", "NK_Enum"]>];
   let Subjects = SubjectList<[TypedefName], ErrorDiag>;
@@ -3227,7 +3227,7 @@ def SwiftNewType : InheritableAttr {
 }
 
 def SwiftPrivate : InheritableAttr {
-  let Spellings = [GNU<"swift_private">];
+  let Spellings = [Clang<"swift_private">];
   let Documentation = [SwiftPrivateDocs];
   let SimpleHandler = 1;
 }
