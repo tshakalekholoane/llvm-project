@@ -5044,6 +5044,17 @@ bool TokenAnnotator::spaceRequiredBetween(const AnnotatedLine &Line,
     return true;
   // Space before parentheses common for all languages
   if (Right.is(tok::l_paren)) {
+    // Space between the return type and the parameter list of an
+    // Objective-C/Blocks block literal that has an explicit return
+    // type, e.g. ^bool (int x) { ... }. Note that a block literal with
+    // no explicit return type, e.g. ^(int x) { ... }, is deliberately
+    // left alone: Left is the caret itself in that case, not an
+    // identifier.
+    if (BeforeLeft && BeforeLeft->is(tok::caret) &&
+        BeforeLeft->is(TT_UnaryOperator) &&
+        (Left.is(tok::identifier) || Left.isTypeName(LangOpts))) {
+      return true;
+    }
     // Function declaration or definition
     if (Line.MightBeFunctionDecl && Right.is(TT_FunctionDeclarationLParen)) {
       if (spaceRequiredBeforeParens(Right))
